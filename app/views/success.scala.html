@@ -1,0 +1,59 @@
+@(tasks: List[Task],taskForm: Form[Task])
+
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href='@routes.Assets.at("stylesheets/success.css")'>
+</head>
+
+<body>
+	<div class="main">
+		
+		@import helper._
+
+@main("Todo list") {
+    
+    <h3>@tasks.size() Prescriptions</h3>
+    
+    <ul>
+        @for(task <- tasks) {
+            <li class="prescription">
+            
+            	<img src="@routes.Application.renderImage(task.id)" width="40" height="50" id="prescription"><br>
+                @task.label
+                
+                @form(routes.Application.deleteTask(task.id)) {
+                    <input type="submit" id="delete" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    
+    
+    
+}
+
+</div>	
+	<form>
+	<div class="navbar">
+		<ul>
+			<li><a href="">Records</a>
+				<ul>
+					<li><a href="@routes.Application.tasks()">Recent Prescriptions</a></li>
+					<li><a>Recent Reports</a></li>
+					<li><a>Prescriptions</a></li>
+					<li><a>Reports</a></li>
+				</ul>
+			</li>
+			<li><a href="">Upload</a>
+				<ul>
+					<li><a href="@routes.Application.upload()">Upload Prescription</a></li>
+					<li><a>Upload Report</a></li>
+				</ul>
+			</li>
+			<input type="image" alt="submit" src='@routes.Assets.at("images/logout.png")'>
+		</ul>
+	</div>
+	</form>
+</body>
+</html>
